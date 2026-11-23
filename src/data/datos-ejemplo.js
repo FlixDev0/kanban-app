@@ -1,0 +1,93 @@
+// Datos de ejemplo para el primer arranque y para "Reiniciar".
+// Siguen el modelo de datos de la especificación (sin campos extra).
+
+export const DATOS_EJEMPLO = {
+  // Próximo número de código: WEB-119 (el último de ejemplo es WEB-118).
+  contadorCodigo: 119,
+  limiteProgreso: 3,
+  tareas: [
+    {
+      id: 1,
+      codigo: 'WEB-102',
+      titulo: 'Pantalla de onboarding',
+      descripcion: '',
+      columna: 'backlog',
+      prioridad: 'media',
+      fechaLimite: '2026-11-20', // vencida (rojo)
+      responsables: [],
+      bloqueada: false,
+      creada: '2026-11-02T10:00:00.000Z',
+      actualizada: '2026-11-02T10:00:00.000Z',
+    },
+    {
+      id: 2,
+      codigo: 'WEB-107',
+      titulo: 'Exportar reportes en CSV',
+      descripcion: '',
+      columna: 'backlog',
+      prioridad: 'baja',
+      fechaLimite: '2026-12-05', // normal
+      responsables: [],
+      bloqueada: false,
+      creada: '2026-11-03T10:00:00.000Z',
+      actualizada: '2026-11-03T10:00:00.000Z',
+    },
+    {
+      id: 3,
+      codigo: 'WEB-115',
+      titulo: 'Autenticación con Google',
+      descripcion: '',
+      columna: 'progreso',
+      prioridad: 'alta',
+      fechaLimite: '2026-11-25', // por vencer (amarillo)
+      responsables: ['JP'],
+      bloqueada: false,
+      creada: '2026-11-05T10:00:00.000Z',
+      actualizada: '2026-11-05T10:00:00.000Z',
+    },
+    {
+      id: 4,
+      codigo: 'WEB-118',
+      titulo: 'Gráfico de avance semanal',
+      descripcion: '',
+      columna: 'progreso',
+      prioridad: 'media',
+      fechaLimite: null,
+      responsables: ['AL'],
+      bloqueada: true,
+      creada: '2026-11-06T10:00:00.000Z',
+      actualizada: '2026-11-06T10:00:00.000Z',
+    },
+    {
+      id: 5,
+      codigo: 'WEB-109',
+      titulo: 'Validación del formulario',
+      descripcion: '',
+      columna: 'revision',
+      prioridad: 'media',
+      fechaLimite: null,
+      responsables: ['JP'],
+      bloqueada: false,
+      creada: '2026-11-04T10:00:00.000Z',
+      actualizada: '2026-11-04T10:00:00.000Z',
+    },
+    {
+      id: 6,
+      codigo: 'WEB-096',
+      titulo: 'Configurar CI',
+      descripcion: '',
+      columna: 'listo',
+      prioridad: 'baja',
+      fechaLimite: null,
+      responsables: ['AL'],
+      bloqueada: false,
+      creada: '2026-10-28T10:00:00.000Z',
+      actualizada: '2026-11-01T10:00:00.000Z',
+    },
+  ],
+  historial: [],
+  equipo: [
+    { nombre: 'JP', rol: 'editar' },
+    { nombre: 'AL', rol: 'editar' },
+  ],
+}

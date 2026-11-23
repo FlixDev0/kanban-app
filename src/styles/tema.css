@@ -1,0 +1,31 @@
+/* Variables de diseño según la sección "Diseño visual" de la especificación. */
+
+:root {
+  --fondo: #0b0d10;
+  --paneles: #11151a;
+  --borde-paneles: #1c2026;
+  --tarjeta: #161a20;
+  --borde-tarjeta: #2a303a;
+  --texto: #e6e8eb;
+  --texto-secundario: #8b929c;
+  --acento: #4f7cff;
+  --prioridad-alta: #ff8a8a;
+  --fondo-alerta: #3a1f1f;
+  --prioridad-media: #f5c26b;
+  --prioridad-baja: #3ddc97;
+
+  --radio-tarjeta: 8px;
+  --fuente: Inter, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 1024px; /* solo escritorio, desde 1024 px */
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--fuente);
+}
