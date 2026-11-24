@@ -121,8 +121,14 @@ const conteoPorColumna = computed(() =>
   ),
 )
 
+// Opciones del filtro: todo el equipo, más cualquier responsable de una tarea que no esté en el equipo.
 const responsablesDisponibles = computed(() =>
-  [...new Set(estado.tareas.flatMap((t) => t.responsables))].sort(),
+  [
+    ...new Set([
+      ...estado.equipo.map((m) => m.nombre),
+      ...estado.tareas.flatMap((t) => t.responsables),
+    ]),
+  ].sort(),
 )
 
 const totalTareas = computed(() => estado.tareas.length)

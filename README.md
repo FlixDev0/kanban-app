@@ -31,7 +31,7 @@ npm run preview
 - **Tablero:** cuatro columnas (Backlog, En progreso, Revisión, Listo). Agregar tareas, moverlas arrastrando o con ← →, bloquearlas y eliminarlas.
 - **Prioridad:** franja de color en el borde de cada tarjeta. Un clic la cambia (alta → media → baja).
 - **Fecha límite:** se muestra como dd/mm. Vencida en rojo; vence en 2 días o menos, en amarillo.
-- **Responsables:** iniciales en círculos, filtro por persona y búsqueda por título o código. Ambos se combinan.
+- **Responsables:** iniciales en círculos, filtro por persona y búsqueda por título o código. Ambos se combinan. El filtro lista a todos los miembros de **Equipo**, tengan o no tareas.
 - **Detalle:** clic en una tarjeta para editar título, descripción, prioridad, fecha y responsables. Los responsables se eligen de un desplegable con los miembros de **Equipo**.
 - **Límite de En progreso:** 3 por defecto, editable en la columna. Si se supera, aparece un aviso, pero la tarea se mueve igual.
 - **Deshacer:** botón o Ctrl+Z, hasta 20 acciones.
