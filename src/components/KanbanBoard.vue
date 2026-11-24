@@ -19,10 +19,14 @@ const {
   deshacerUltimo,
   reiniciar,
   puedeEditar,
+  mensaje,
+  tablero,
 } = useKanban()
 
 function confirmarReinicio() {
-  if (confirm('¿Volver al tablero inicial? Se borran tus cambios.')) reiniciar()
+  if (confirm(`¿Volver el tablero "${tablero.value.nombre}" a su estado inicial? Se borran sus cambios.`)) {
+    reiniciar()
+  }
 }
 
 function alPresionarTecla(evento) {
@@ -44,9 +48,9 @@ onUnmounted(() => window.removeEventListener('keydown', alPresionarTecla))
 <template>
   <div class="cabecera">
     <div>
-      <h1>Tablero</h1>
+      <h1>{{ tablero.nombre }}</h1>
       <p class="sub">
-        {{ totalTareas }} tareas · {{ totalBloqueadas }} bloqueada{{ totalBloqueadas === 1 ? '' : 's' }}
+        Código {{ tablero.prefijo }} · {{ totalTareas }} tareas · {{ totalBloqueadas }} bloqueada{{ totalBloqueadas === 1 ? '' : 's' }}
       </p>
     </div>
     <div class="herramientas">
@@ -80,6 +84,8 @@ onUnmounted(() => window.removeEventListener('keydown', alPresionarTecla))
     :key="tareaAbierta.id"
     :tarea="tareaAbierta"
   />
+
+  <div v-if="mensaje" class="mensaje" role="status">{{ mensaje }}</div>
 </template>
 
 <style scoped>
@@ -129,6 +135,22 @@ button:hover:not(:disabled) {
 button:disabled {
   opacity: 0.35;
   cursor: default;
+}
+
+.mensaje {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 20;
+  max-width: min(560px, 90vw);
+  padding: 10px 16px;
+  font-size: 13px;
+  border-radius: 8px;
+  color: var(--prioridad-media);
+  background: #2a2314;
+  border: 1px solid rgba(245, 194, 107, 0.45);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
 }
 
 .tablero {

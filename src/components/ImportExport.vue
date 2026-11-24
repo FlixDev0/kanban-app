@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { useKanban } from '../composables/useKanban.js'
 import { validarTablero } from '../utils/validar.js'
 
-const { exportarTablero, importarTablero, puedeEditar } = useKanban()
+const { exportarTablero, importarTablero, puedeEditar, tablero } = useKanban()
 const mensaje = ref('')
 const esError = ref(false)
 
@@ -18,7 +18,7 @@ function exportar() {
   const enlace = document.createElement('a')
   const hoy = new Date().toISOString().slice(0, 10)
   enlace.href = url
-  enlace.download = `kanban-${hoy}.json`
+  enlace.download = `kanban-${tablero.value.prefijo.toLowerCase()}-${hoy}.json`
   enlace.click()
   URL.revokeObjectURL(url)
   mostrar('Tablero exportado.')
@@ -44,7 +44,7 @@ async function alElegirArchivo(evento) {
     return
   }
 
-  if (!confirm('¿Reemplazar el tablero actual con el contenido de este archivo?')) return
+  if (!confirm(`¿Reemplazar el contenido del tablero "${tablero.value.nombre}" con este archivo?`)) return
 
   const resultado = importarTablero(datos)
   if (resultado.ok) mostrar('Tablero importado.')

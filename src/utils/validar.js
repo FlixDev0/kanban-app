@@ -13,7 +13,7 @@ export const FORMATO_ARCHIVO = 'kanban-tablero'
 
 const IDS_COLUMNA = COLUMNAS.map((c) => c.id)
 const REGEX_FECHA = /^\d{4}-\d{2}-\d{2}$/
-const REGEX_CODIGO = /^WEB-\d{3,}$/
+const REGEX_CODIGO = /^[A-Z0-9]{2,6}-\d{3,}$/
 
 const esTexto = (v) => typeof v === 'string'
 const esFechaIso = (v) => esTexto(v) && !Number.isNaN(Date.parse(v))
@@ -24,7 +24,7 @@ function validarTarea(t, posicion) {
 
   if (!t || typeof t !== 'object' || Array.isArray(t)) return error('no es un objeto.')
   if (!Number.isFinite(t.id)) return error('id inválido.')
-  if (!REGEX_CODIGO.test(t.codigo)) return error('código inválido (formato WEB-000).')
+  if (!REGEX_CODIGO.test(t.codigo)) return error('código inválido (formato ABC-000).')
   if (!esTexto(t.titulo) || !t.titulo.trim() || t.titulo.length > LIMITES_TITULO.titulo) {
     return error('título vacío o demasiado largo.')
   }
@@ -91,10 +91,11 @@ export function validarTablero(archivo) {
     if (problema) return problema
   }
 
-  const equipo = archivo.equipo ?? []
-  if (!Array.isArray(equipo)) return error('El equipo no es una lista.')
+  // El equipo es opcional: si el archivo no lo trae, se conserva el actual (equipo = null).
+  const equipo = archivo.equipo ?? null
+  if (equipo !== null && !Array.isArray(equipo)) return error('El equipo no es una lista.')
   const nombresEquipo = new Set()
-  for (let i = 0; i < equipo.length; i++) {
+  for (let i = 0; i < (equipo?.length ?? 0); i++) {
     const m = equipo[i]
     if (!m || typeof m !== 'object' || !esTexto(m.nombre) || !m.nombre.trim()) {
       return error(`Miembro ${i + 1}: nombre inválido.`)

@@ -9,8 +9,20 @@ const props = defineProps({
   indice: { type: Number, required: true },
 })
 
-const { alternarBloqueo, cambiarPrioridad, eliminarTarea, moverPaso, abrirDetalle, puedeEditar } =
-  useKanban()
+const {
+  alternarBloqueo,
+  cambiarPrioridad,
+  eliminarTarea,
+  moverPaso,
+  abrirDetalle,
+  puedeEditar,
+  progresoLleno,
+} = useKanban()
+
+// Si la columna de destino es En progreso y está en su límite, la flecha no se puede usar.
+function destinoLleno(direccion) {
+  return COLUMNAS[props.indice + direccion]?.id === 'progreso' && progresoLleno.value
+}
 
 const esPrimera = computed(() => props.indice === 0)
 const esUltima = computed(() => props.indice === COLUMNAS.length - 1)
@@ -97,16 +109,16 @@ function eliminar() {
     <div class="movimientos">
       <button
         class="icono"
-        title="Columna anterior"
-        :disabled="esPrimera || !puedeEditar"
+        :title="destinoLleno(-1) ? 'En progreso está en su límite' : 'Columna anterior'"
+        :disabled="esPrimera || !puedeEditar || destinoLleno(-1)"
         @click.stop="moverPaso(tarea.id, -1)"
       >
         ←
       </button>
       <button
         class="icono"
-        title="Columna siguiente"
-        :disabled="esUltima || !puedeEditar"
+        :title="destinoLleno(1) ? 'En progreso está en su límite' : 'Columna siguiente'"
+        :disabled="esUltima || !puedeEditar || destinoLleno(1)"
         @click.stop="moverPaso(tarea.id, 1)"
       >
         →
